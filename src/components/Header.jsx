@@ -1,15 +1,20 @@
-import Header from "./components/header/index";
-import Footer from "./components/Footer";
-import { Outlet } from "react-router-dom";
+import Logo from "../assets/logo.png";
+import { NavLink } from "react-router-dom";
 
-const Layout = () => {
+const Header = () => {
   return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-    </>
+    <header className="z-10">
+      <nav className="flex justify-between mb-5">
+        <NavLink to="/">
+          <img className="h-20" src={Logo} alt="Logo" />
+        </NavLink>
+
+        <NavLink to="/profile">
+          <span>Hello</span>
+        </NavLink>
+      </nav>
+    </header>
   );
 };
 
-export default Layout;
+export default Header;
