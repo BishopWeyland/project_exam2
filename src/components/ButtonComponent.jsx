@@ -5,7 +5,7 @@ const BaseButton = styled.button`
   font-size: 20px;
   font-weight: 600;
   color: white;
-  background-color: #0e9072;
+  background-color: #295871;
   border-radius: 6px;
   padding: 10px 20px;
   cursor: pointer;
