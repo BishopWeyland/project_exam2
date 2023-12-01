@@ -1,5 +1,7 @@
+import LoginComponent from "../components/LoginComponent";
+
 const SignIn = () => {
-  return <h1 className="text-3xl font-bold underline">Sign in</h1>;
+  return <LoginComponent></LoginComponent>;
 };
 
 export default SignIn;
