@@ -15,6 +15,9 @@ const LandingPage = () => {
         <Link to="/SignIn">
           <BaseButton>Sign in</BaseButton>
         </Link>
+        <Link to="/SignUp">
+          <BaseButton>Register user</BaseButton>
+        </Link>
       </div>
     </div>
   );
