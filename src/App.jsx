@@ -5,6 +5,7 @@ import LandingPage from "./pages/LandingPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Layout from "./Layout";
+import SingleVenue from "./components/SingleVenue";
 import "./index.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="landingpage" element={<LandingPage />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="venue/:id" element={<SingleVenue />} />
         </Route>
       </Routes>
     </Router>
