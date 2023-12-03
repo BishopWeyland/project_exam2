@@ -40,8 +40,8 @@ const VenuesComponent = () => {
 
   return (
     <div className="shadow-md p-5 mt-10 rounded-md">
-      <div className="flex justify-between w-3/5">
-        <h2>New venues</h2>
+      <div className="flex flex-col lg:flex-row sm:flex-col justify-between w-full">
+        <h2 className="sm:text-2xl md:text-3xl mb-2 lg:mb-0">New venues</h2>
         <input
           type="text"
           placeholder="Search venues..."
@@ -73,7 +73,10 @@ const VenuesComponent = () => {
               </div>
             </div>
 
-            <p className="text-sm">${venue.price} a night</p>
+            <p className="text-1xl font-bold">
+              ${venue.price}{" "}
+              <span className="text-brand-grey font-normal">a night</span>
+            </p>
           </Link>
         ))}
       </ul>
