@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import Logo from "../assets/logo.png";
 import DefaultAvatar from "../assets/1891016_user_male_avatar_account_profile_icon.png";
+
 const Header = () => {
   const { userProfile } = useUser();
 
@@ -21,7 +22,7 @@ const Header = () => {
                 src={userProfile.avatar || DefaultAvatar}
                 alt="User Avatar"
               />
-              <span className="ml-2">{userProfile.name}</span>
+              <span className="ml-2 hidden sm:block">{userProfile.name}</span>
             </>
           )}
         </NavLink>
