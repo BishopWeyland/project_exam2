@@ -3,9 +3,11 @@ import ApiConfig from "./ApiConfig";
 const { baseURL } = ApiConfig;
 
 const getAuthHeaders = () => {
-  const token = localStorage.getItem("authToken");
+  const userProfile = JSON.parse(localStorage.getItem("userProfile")) || {};
+  const { accessToken } = userProfile;
+
   return {
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${accessToken}`,
     "Content-Type": "application/json",
   };
 };
@@ -90,27 +92,50 @@ const api = {
 
   createBooking: async (bookingData) => {
     try {
-      const token = localStorage.getItem("authToken");
-
-      if (!token) {
-        console.error(
-          "Error creating booking: Authentication token is missing"
-        );
-        return;
-      }
-
       const response = await fetch(`${baseURL}/holidaze/bookings`, {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
+        headers: getAuthHeaders(),
         body: JSON.stringify(bookingData),
       });
 
       return handleResponse(response);
     } catch (error) {
       console.error("Error creating booking:", error.message);
+      throw error;
+    }
+  },
+
+  updateProfileMedia: async (username, mediaData) => {
+    try {
+      const response = await fetch(
+        `${baseURL}/holidaze/profiles/${username}/media`,
+        {
+          method: "PUT",
+          headers: getAuthHeaders(),
+          body: JSON.stringify(mediaData),
+        }
+      );
+
+      return handleResponse(response);
+    } catch (error) {
+      console.error("Update profile media error:", error.message);
+      throw error;
+    }
+  },
+
+  createVenue: async (venueData) => {
+    try {
+      const headers = getAuthHeaders();
+
+      const response = await fetch(`${baseURL}/holidaze/venues`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(venueData),
+      });
+
+      return handleResponse(response);
+    } catch (error) {
+      console.error("Error creating venue:", error.message);
       throw error;
     }
   },
