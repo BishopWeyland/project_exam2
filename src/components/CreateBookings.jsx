@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import api from "../api/Api";
 import { useUser } from "../context/UserContext";
 import CalendarComponent from "./DateRangePicker";
+import { BaseButton } from "./ButtonComponent";
 
 const BookingForm = ({ venue }) => {
   const [selectedDates, setSelectedDates] = useState({
@@ -85,10 +86,10 @@ const BookingForm = ({ venue }) => {
   };
 
   return (
-    <div className="flex ml-20">
+    <div className="flex flex-col justify-center md:flex-row ml-20">
       <CalendarComponent onChange={handleDateChange} />
 
-      <div className="ml-20 w-96">
+      <div className="md:ml-20">
         <p>{venue.price} $ a night</p>
         {calculateTotalNights() > 0 && (
           <div>
@@ -106,7 +107,7 @@ const BookingForm = ({ venue }) => {
             </div>
           </div>
         )}{" "}
-        <button onClick={handleBookingSubmit}>Create Booking</button>
+        <BaseButton onClick={handleBookingSubmit}>Create Booking</BaseButton>
       </div>
     </div>
   );
