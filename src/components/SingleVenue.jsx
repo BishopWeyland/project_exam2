@@ -67,22 +67,24 @@ const SingleVenue = () => {
         src={venue.media && venue.media[0]}
         alt={venue.name}
       />
-      <div className="flex shadow-md p-5 rounded-md">
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <div className="overflow-y-auto max-h-[200px]">
-          <div className="flex">
-            <StarRating rating={venue.rating} maxRating={5} />
+      <div>
+        <div className="flex flex-col md:flex-row shadow-md p-5 rounded-md">
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          <div className="w-96 overflow-y-auto max-h-[200px]">
+            <div className="flex">
+              <StarRating rating={venue.rating} maxRating={5} />
+            </div>
+            <Amenities meta={venue.meta} />
+            <p className="text-sm">{venue.description}</p>
           </div>
-          <Amenities meta={venue.meta} />
-          <p className="text-sm">{venue.description}</p>
-        </div>
 
-        <div>
-          {isOwner ? (
-            <VenueBookings venueId={id} />
-          ) : (
-            <BookingForm venue={venue} />
-          )}
+          <div>
+            {isOwner ? (
+              <VenueBookings venueId={id} />
+            ) : (
+              <BookingForm venue={venue} />
+            )}
+          </div>
         </div>
       </div>
     </div>
