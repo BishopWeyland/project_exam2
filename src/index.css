@@ -6,3 +6,15 @@ body {
   margin: 0rem 10rem;
   background-color: #f6f6f6;
 }
+
+@media (max-width: 1200px) {
+  body {
+    margin: 0rem 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    margin: 0rem 1rem;
+  }
+}
