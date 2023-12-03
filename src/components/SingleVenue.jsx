@@ -4,12 +4,12 @@ import api from "../api/Api";
 import StarRating from "./StarRating";
 import Amenities from "./AmenetiesComponent";
 import BookingForm from "./CreateBookings";
-import VenueBookings from "./VenueBookings"; // Import the new component
-import { useUser } from "../context/UserContext"; // Import the UserContext
+import VenueBookings from "./VenueBookings";
+import { useUser } from "../context/UserContext";
 
 const SingleVenue = () => {
   const { id } = useParams();
-  const { userProfile } = useUser(); // Access the user profile from the context
+  const { userProfile } = useUser();
   const [venue, setVenue] = useState({});
   const [error, setError] = useState(null);
   const [isOwner, setIsOwner] = useState(false);
@@ -20,7 +20,6 @@ const SingleVenue = () => {
         const venueData = await api.getVenueById(id, true, true);
         setVenue(venueData);
 
-        // Check if the user's profile name matches the venue owner's name
         setIsOwner(userProfile && userProfile.name === venueData.owner.name);
       } catch (error) {
         setError("Error fetching venue details. Please try again.");
@@ -80,10 +79,8 @@ const SingleVenue = () => {
 
         <div>
           {isOwner ? (
-            // If the user is the owner, display VenueBookings component
             <VenueBookings venueId={id} />
           ) : (
-            // Otherwise, display BookingForm component
             <BookingForm venue={venue} />
           )}
         </div>
