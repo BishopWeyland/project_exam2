@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import api from "../api/Api";
+import { useUser } from "../context/UserContext";
 import CalendarComponent from "./DateRangePicker";
 
 const BookingForm = ({ venue }) => {
@@ -37,6 +38,8 @@ const BookingForm = ({ venue }) => {
     };
   };
 
+  const { userProfile } = useUser();
+
   const handleBookingSubmit = async () => {
     const totalNights = calculateTotalNights();
     const totalPriceDetails = calculateTotalPrice();
@@ -49,16 +52,17 @@ const BookingForm = ({ venue }) => {
     };
 
     try {
-      const token = localStorage.getItem("authToken");
-
-      if (!token) {
+      if (!userProfile || !userProfile.accessToken) {
         console.error(
           "Error creating booking: Authentication token is missing"
         );
         return;
       }
 
-      const response = await api.createBooking(bookingData, token);
+      const response = await api.createBooking(
+        bookingData,
+        userProfile.accessToken
+      );
       console.log("Booking response:", response);
 
       if (response && response.id) {
