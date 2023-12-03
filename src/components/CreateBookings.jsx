@@ -26,12 +26,20 @@ const BookingForm = ({ venue }) => {
   const calculateTotalPrice = () => {
     const totalNights = calculateTotalNights();
     const pricePerNight = venue.price;
-    return totalNights * pricePerNight;
+    const subtotal = totalNights * pricePerNight;
+    const serviceFee = 75;
+    const total = subtotal + serviceFee;
+
+    return {
+      subtotal: subtotal,
+      serviceFee: serviceFee,
+      total: total,
+    };
   };
 
   const handleBookingSubmit = async () => {
     const totalNights = calculateTotalNights();
-    const totalPrice = calculateTotalPrice();
+    const totalPriceDetails = calculateTotalPrice();
 
     const bookingData = {
       dateFrom: adjustToTimezone(selectedDates.startDate).toISOString(),
@@ -73,15 +81,29 @@ const BookingForm = ({ venue }) => {
   };
 
   return (
-    <div>
+    <div className="flex ml-20">
       <CalendarComponent onChange={handleDateChange} />
 
-      <div>
-        <span>{venue.price} $ a night</span>
-        {calculateTotalNights() > 0 && <p>Total: ${calculateTotalPrice()}</p>}
+      <div className="ml-20 w-96">
+        <p>{venue.price} $ a night</p>
+        {calculateTotalNights() > 0 && (
+          <div>
+            <div className="flex justify-between">
+              <p>Subtotal:</p>
+              <p>{`${calculateTotalPrice().subtotal}$`}</p>
+            </div>
+            <div className="flex justify-between">
+              <p>Holidaze Service Fee:</p>
+              <p>{`${calculateTotalPrice().serviceFee}$`}</p>
+            </div>
+            <div className="flex justify-between">
+              <p>Total:</p>
+              <p>{` ${calculateTotalPrice().total}$`}</p>
+            </div>
+          </div>
+        )}{" "}
+        <button onClick={handleBookingSubmit}>Create Booking</button>
       </div>
-
-      <button onClick={handleBookingSubmit}>Create Booking</button>
     </div>
   );
 };
