@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className="z-10">
       <nav className="flex justify-between items-center mb-5">
-        <NavLink to="/">
+        <NavLink to="/Home">
           <img className="h-20" src={Logo} alt="Logo" />
         </NavLink>
 
