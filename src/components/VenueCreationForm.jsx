@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import api from "../api/Api";
+import { BaseButton } from "../components/ButtonComponent";
 
 const VenueCreationForm = ({ onCreateVenue }) => {
   const [newVenueData, setNewVenueData] = useState({
@@ -101,159 +102,173 @@ const VenueCreationForm = ({ onCreateVenue }) => {
   };
 
   return (
-    <form className="w-96">
-      <h2>Create New Venue</h2>
-      <div className="flex items-center mb-4">
-        <label className="mr-4">
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={newVenueData.name}
-            onChange={handleNewVenueChange}
-          />
-        </label>
-        <label>
-          Image URL:
-          <input
-            type="text"
-            name="imgUrl"
-            value={newVenueData.imgUrl}
-            onChange={handleNewVenueChange}
-          />
-        </label>
-      </div>
-      <div className="mb-4">
-        <label>
-          Description:
-          <textarea
-            name="description"
-            value={newVenueData.description}
-            onChange={handleNewVenueChange}
-            style={{ resize: "none" }}
-          />
-        </label>
-      </div>
-      <div className="flex items-center mb-4">
-        <label className="mr-4">
-          Price per night:
-          <input
-            type="number"
-            name="price"
-            value={newVenueData.price}
-            onChange={handleNewVenueChange}
-          />
-        </label>
-        <label className="mr-4">
-          Rating:
-          <input
-            type="number"
-            name="rating"
-            value={newVenueData.rating}
-            onChange={handleNewVenueChange}
-          />
-        </label>
-        <div>
-          <h3>Meta:</h3>
-          <label>
-            Wifi:
+    <div className="w-full py-20 shadow-md flex flex-col justify-center h-full md:py-32">
+      <form className="w-72 md:w-min mx-auto">
+        <h2>Create New Venue</h2>
+        <div className="flex flex-col md:flex-row mb-4">
+          <label className="mb-2 md:mr-4">
+            Name:
             <input
-              type="checkbox"
-              checked={newVenueData.meta.wifi}
-              onChange={() => handleMetaChange("wifi")}
+              className="w-full md:w-72 lg:w-96"
+              type="text"
+              name="name"
+              value={newVenueData.name}
+              onChange={handleNewVenueChange}
             />
           </label>
-          <label>
-            Parking:
+          <label className="mb-2">
+            Image URL:
             <input
-              type="checkbox"
-              checked={newVenueData.meta.parking}
-              onChange={() => handleMetaChange("parking")}
-            />
-          </label>
-          <label>
-            Breakfast:
-            <input
-              type="checkbox"
-              checked={newVenueData.meta.breakfast}
-              onChange={() => handleMetaChange("breakfast")}
-            />
-          </label>
-          <label>
-            Pets:
-            <input
-              type="checkbox"
-              checked={newVenueData.meta.pets}
-              onChange={() => handleMetaChange("pets")}
+              className="w-full md:w-72 lg:w-96"
+              type="text"
+              name="imgUrl"
+              value={newVenueData.imgUrl}
+              onChange={handleNewVenueChange}
             />
           </label>
         </div>
-      </div>
-      <div className="mb-4">
-        <label>
-          Country:
-          <input
-            type="text"
-            name="country"
-            value={newVenueData.location.country}
-            onChange={(e) =>
-              handleNewVenueChange({
-                target: {
-                  name: "location",
-                  value: {
-                    ...newVenueData.location,
-                    country: e.target.value,
+        <div className="flex flex-col md:flex-row">
+          <div className="mb-4 md:mr-4">
+            <label className="flex flex-col">
+              Description:
+              <textarea
+                className="w-full md:w-72 lg:w-96 mb-4 md:mb-0"
+                name="description"
+                value={newVenueData.description}
+                onChange={handleNewVenueChange}
+                style={{ resize: "none" }}
+              />
+            </label>
+          </div>
+          <div className="flex-col mb-4 md:w-72 lg:w-96">
+            <div className="flex flex-col md:flex-row w-full justify-between">
+              <label className="mb-2 md:mr-2">
+                Price per night:
+                <input
+                  className="w-full md:w-32 lg:w-44"
+                  type="number"
+                  name="price"
+                  value={newVenueData.price}
+                  onChange={handleNewVenueChange}
+                />
+              </label>
+              <label className="mb-2">
+                Rating:
+                <input
+                  className="w-full md:w-32 lg:w-44"
+                  type="number"
+                  name="rating"
+                  value={newVenueData.rating}
+                  onChange={handleNewVenueChange}
+                />
+              </label>
+            </div>
+
+            <div className="flex justify-between">
+              <label className="mb-2 md:mr-2">
+                Wifi:
+                <input
+                  type="checkbox"
+                  checked={newVenueData.meta.wifi}
+                  onChange={() => handleMetaChange("wifi")}
+                />
+              </label>
+              <label className="mb-2 md:mr-2">
+                Parking:
+                <input
+                  type="checkbox"
+                  checked={newVenueData.meta.parking}
+                  onChange={() => handleMetaChange("parking")}
+                />
+              </label>
+              <label className="mb-2 md:mr-2">
+                Breakfast:
+                <input
+                  type="checkbox"
+                  checked={newVenueData.meta.breakfast}
+                  onChange={() => handleMetaChange("breakfast")}
+                />
+              </label>
+              <label className="mb-2">
+                Pets:
+                <input
+                  type="checkbox"
+                  checked={newVenueData.meta.pets}
+                  onChange={() => handleMetaChange("pets")}
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row mb-4">
+          <label className="mb-2 md:mr-4">
+            Country:
+            <input
+              className="w-full md:w-72 lg:w-96"
+              type="text"
+              name="country"
+              value={newVenueData.location.country}
+              onChange={(e) =>
+                handleNewVenueChange({
+                  target: {
+                    name: "location",
+                    value: {
+                      ...newVenueData.location,
+                      country: e.target.value,
+                    },
                   },
-                },
-              })
-            }
-          />
-        </label>
-        <label className="ml-4">
-          City:
-          <input
-            type="text"
-            name="city"
-            value={newVenueData.location.city}
-            onChange={(e) =>
-              handleNewVenueChange({
-                target: {
-                  name: "location",
-                  value: {
-                    ...newVenueData.location,
-                    city: e.target.value,
+                })
+              }
+            />
+          </label>
+          <label className="mb-2">
+            City:
+            <input
+              className="w-full md:w-72 lg:w-96"
+              type="text"
+              name="city"
+              value={newVenueData.location.city}
+              onChange={(e) =>
+                handleNewVenueChange({
+                  target: {
+                    name: "location",
+                    value: {
+                      ...newVenueData.location,
+                      city: e.target.value,
+                    },
                   },
-                },
-              })
-            }
-          />
-        </label>
-      </div>
-      <div className="mb-4">
-        <label>
-          Address:
-          <input
-            type="text"
-            name="address"
-            value={newVenueData.location.address}
-            onChange={(e) =>
-              handleNewVenueChange({
-                target: {
-                  name: "location",
-                  value: {
-                    ...newVenueData.location,
-                    address: e.target.value,
+                })
+              }
+            />
+          </label>
+        </div>
+        <div className="mb-4">
+          <label className="flex flex-col">
+            Address:
+            <input
+              className="w-full md:w-72 lg:w-96"
+              type="text"
+              name="address"
+              value={newVenueData.location.address}
+              onChange={(e) =>
+                handleNewVenueChange({
+                  target: {
+                    name: "location",
+                    value: {
+                      ...newVenueData.location,
+                      address: e.target.value,
+                    },
                   },
-                },
-              })
-            }
-          />
-        </label>
-      </div>
-      <button type="button" onClick={handleCreateVenue}>
-        Create Venue
-      </button>
-    </form>
+                })
+              }
+            />
+          </label>
+        </div>
+        <BaseButton type="button" onClick={handleCreateVenue}>
+          Create Venue
+        </BaseButton>
+      </form>
+    </div>
   );
 };
 
