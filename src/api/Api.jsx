@@ -189,6 +189,40 @@ const api = {
       throw error;
     }
   },
+
+  updateVenue: async (venueId, venueData) => {
+    try {
+      const response = await fetch(`${baseURL}/holidaze/venues/${venueId}`, {
+        method: "PUT",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(venueData),
+      });
+
+      return handleResponse(response);
+    } catch (error) {
+      console.error("Error updating venue:", error.message);
+      throw error;
+    }
+  },
+
+  deleteVenue: async (venueId) => {
+    try {
+      const response = await fetch(`${baseURL}/holidaze/venues/${venueId}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      });
+
+      if (!response.ok) {
+        console.error(
+          `Error deleting venue: ${response.statusText || "Unknown Error"}`
+        );
+        throw new Error(`Error: ${response.statusText || "Unknown Error"}`);
+      }
+    } catch (error) {
+      console.error("Delete venue error:", error.message);
+      throw error;
+    }
+  },
 };
 
 export default api;
