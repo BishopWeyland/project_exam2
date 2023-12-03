@@ -19,7 +19,7 @@ const CalendarComponent = ({ onChange }) => {
   };
 
   return (
-    <div>
+    <div className="flex justify-center">
       <DateRange
         editableDateInputs={true}
         onChange={handleDateChange}
