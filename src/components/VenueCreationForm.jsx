@@ -140,7 +140,7 @@ const VenueCreationForm = ({ onCreateVenue }) => {
               />
             </label>
           </div>
-          <div className="flex-col mb-4 md:w-72 lg:w-96">
+          <div className="flex-col  mb-4 md:w-72 lg:w-96">
             <div className="flex flex-col md:flex-row w-full justify-between">
               <label className="mb-2 md:mr-2">
                 Price per night:
@@ -264,6 +264,7 @@ const VenueCreationForm = ({ onCreateVenue }) => {
             />
           </label>
         </div>
+
         <BaseButton type="button" onClick={handleCreateVenue}>
           Create Venue
         </BaseButton>
