@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import api from "../api/Api";
+import { useUser } from "../context/UserContext";
 
 const LoginComponent = () => {
+  const { login } = useUser();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   const [errorMessages, setErrorMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,17 +22,28 @@ const LoginComponent = () => {
 
   const handleLogin = async () => {
     try {
+      setLoading(true);
       const response = await api.loginUser({
         email: formData.email,
         password: formData.password,
       });
 
-      const { accessToken } = response;
-      localStorage.setItem("authToken", accessToken);
+      const { name, email, avatar, venueManager, accessToken } = response;
+
+      login({
+        name,
+        email,
+        avatar,
+        venueManager,
+        accessToken,
+      });
+
       console.log("Login response:", response);
     } catch (error) {
       console.error("Login error:", error.message);
       setErrorMessages(["Invalid email or password. Please try again."]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,8 +79,8 @@ const LoginComponent = () => {
           </div>
         )}
 
-        <button type="button" onClick={handleLogin}>
-          Login
+        <button type="button" onClick={handleLogin} disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
