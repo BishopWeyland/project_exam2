@@ -1,4 +1,3 @@
-// SingleVenue.jsx
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api/Api";
@@ -77,10 +76,6 @@ const SingleVenue = () => {
 
         <div>
           <BookingForm venue={venue} />
-        </div>
-        <div className="mt-4">
-          <p className="text-sm">Price: ${venue.price} a night</p>
-          <p className="text-sm">Max Guests: {venue.maxGuests}</p>
         </div>
       </div>
     </div>
