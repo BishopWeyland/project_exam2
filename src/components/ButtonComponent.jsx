@@ -17,7 +17,7 @@ const BaseButton = styled.button`
 `;
 
 const DeleteButton = styled(BaseButton)`
-  background-color: #2e383f;
+  background-color: #900e0e;
 `;
 
 function Button() {
