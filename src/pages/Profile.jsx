@@ -4,6 +4,8 @@ import ProfileEditComponent from "../components/ProfileEditComponent";
 import DefaultAvatar from "../assets/1891016_user_male_avatar_account_profile_icon.png";
 import { BaseButton } from "../components/ButtonComponent";
 import { Link } from "react-router-dom";
+import VenuesByProfileComponent from "../components/VenuesByProfile";
+import BookingsByProfileComponent from "../components/BookingsByProfile";
 
 const ProfilePage = () => {
   const { userProfile } = useUser();
@@ -38,10 +40,12 @@ const ProfilePage = () => {
       </div>
 
       {userProfile && userProfile.venueManager && (
-        <div className="flex justify-center">
-          <Link to="/CreateVenue">
+        <div className="flex flex-col justify-center">
+          <Link className="flex justify-center" to="/CreateVenue">
             <BaseButton>Create venue</BaseButton>
           </Link>
+          <VenuesByProfileComponent />
+          <BookingsByProfileComponent />
         </div>
       )}
     </div>
