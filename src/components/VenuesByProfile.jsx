@@ -57,22 +57,26 @@ const VenuesByProfileComponent = () => {
       {error && <p style={{ color: "red" }}>{error}</p>}
       <ul className="flex flex-wrap justify-center">
         {filteredVenues.map((venue) => (
-          <Link
+          <div
             key={venue.id}
-            to={`/venue/${venue.id}`}
             className="p-4 w-80 transform hover:scale-105 transition-transform"
           >
-            <img
-              className="w-80 h-80 object-cover mb-4 rounded-md"
-              src={venue.media && venue.media[0]}
-              alt={venue.name}
-            />
-            <div className="flex justify-between">
-              <div>
-                <h2 className="text-lg font-bold mb-2">{venue.name}</h2>
+            <Link to={`/venue/${venue.id}`}>
+              <img
+                className="w-80 h-80 object-cover mb-4 rounded-md"
+                src={venue.media && venue.media[0]}
+                alt={venue.name}
+              />
+              <div className="flex justify-between">
+                <div>
+                  <h2 className="text-lg font-bold mb-2">{venue.name}</h2>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+            <Link to={`/editvenue/${venue.id}`}>
+              <BaseButton>Edit Venue</BaseButton>
+            </Link>
+          </div>
         ))}
       </ul>
     </div>
