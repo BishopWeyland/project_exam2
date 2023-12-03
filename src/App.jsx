@@ -9,6 +9,7 @@ import SingleVenue from "./components/SingleVenue";
 import { UserProvider } from "./context/UserContext";
 import "./index.css";
 import CreateVenue from "./pages/CreateVenue";
+import EditVenue from "./pages/EditVenue";
 
 function App() {
   return (
@@ -17,12 +18,13 @@ function App() {
         {" "}
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route index element={<LandingPage />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="landingpage" element={<LandingPage />} />
+            <Route path="home" element={<Home />} />
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="createvenue" element={<CreateVenue />} />
+            <Route path="editvenue/:id" component={EditVenue} />
             <Route path="venue/:id" element={<SingleVenue />} />
           </Route>
         </Routes>
