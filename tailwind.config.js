@@ -9,6 +9,9 @@ export default {
         "brand-grey": "#464646",
         "brand-red": "#900E0E",
       },
+      fontFamily: {
+        allerta: ["Allerta", "sans"],
+      },
     },
   },
   plugins: [],
