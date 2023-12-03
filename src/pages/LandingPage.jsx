@@ -8,12 +8,12 @@ const LandingPage = () => {
       className=" py-56 px-32 flex justify-center md:h-screen bg-cover bg-center text-center flex-col"
       style={{ backgroundImage: `url(${Hero})` }}
     >
-      <h1 className="text-9xl text-white">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-white">
         Book your next vacation at Holidaze
       </h1>
       <div>
         <Link to="/SignIn">
-          <BaseButton>Sign in</BaseButton>
+          <BaseButton className="mr-4">Sign in</BaseButton>
         </Link>
         <Link to="/SignUp">
           <BaseButton>Register user</BaseButton>
