@@ -72,11 +72,22 @@ const api = {
     }
   },
 
-  getVenueById: async (id, includeOwner = false) => {
+  getVenueById: async (
+    venueId,
+    includeOwner = true,
+    includeBookings = true
+  ) => {
     try {
-      const queryParams = includeOwner ? "?_owner=true" : "";
+      const queryParams = new URLSearchParams();
+      if (includeOwner) {
+        queryParams.append("_owner", "true");
+      }
+      if (includeBookings) {
+        queryParams.append("_bookings", "true");
+      }
+
       const response = await fetch(
-        `${baseURL}/holidaze/venues/${id}${queryParams}`,
+        `${baseURL}/holidaze/venues/${venueId}?${queryParams.toString()}`,
         {
           method: "GET",
           headers: getAuthHeaders(),
@@ -136,6 +147,45 @@ const api = {
       return handleResponse(response);
     } catch (error) {
       console.error("Error creating venue:", error.message);
+      throw error;
+    }
+  },
+
+  getAllVenuesByProfile: async (profileName) => {
+    try {
+      const response = await fetch(
+        `${baseURL}/holidaze/profiles/${profileName}/venues`,
+        {
+          method: "GET",
+          headers: getAuthHeaders(),
+        }
+      );
+
+      return handleResponse(response);
+    } catch (error) {
+      console.error(`Get all venues by profile error: ${error.message}`);
+      throw error;
+    }
+  },
+
+  getAllBookingsByProfile: async (
+    profileName,
+    includeCustomer = true,
+    includeVenue = true
+  ) => {
+    try {
+      const queryParams = `?_customer=${includeCustomer}&_venue=${includeVenue}`;
+      const response = await fetch(
+        `${baseURL}/holidaze/profiles/${profileName}/bookings${queryParams}`,
+        {
+          method: "GET",
+          headers: getAuthHeaders(),
+        }
+      );
+
+      return handleResponse(response);
+    } catch (error) {
+      console.error("Get all bookings by profile error:", error.message);
       throw error;
     }
   },
