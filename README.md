@@ -1,6 +1,6 @@
 # Holidaze | Noroff project exam 2
 
-![image](../vite-project/src/assets/Skjermbilde%202023-12-07%20kl.%2018.37.26.png)
+![image](./src/assets/Skjermbilde%202023-12-07%20kl.%2018.37.26.png)
 
 ## Description
 
